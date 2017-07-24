@@ -1,0 +1,98 @@
+allprojects {
+  repositories {
+    jcenter()
+  }
+}
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+ext {
+
+  //Libraries
+  appCompatVersion = '25.3.1'
+  rxJavaVersion = '2.0.2'
+  rxAndroidVersion = '2.0.1'
+  arrowVersion = '1.0.0'
+  slickVersion = '0.1'
+  designVersion = '25.3.1'
+  playServicesVersion = '8.4.0'
+  daggerVersion = '2.9'
+  annotationVersion = '1.0'
+  retrofitVersion = '2.0.2'
+  retrofitAdaptersVersion = '2.3.0'
+  smartTabLayoutVersion = '1.6.1@aar'
+  butterknifeVersion = '8.5.1'
+
+
+
+  //Testing
+  mockitoVersion = '1.10.19'
+  junitVersion = '4.12'
+  assertjVersion = '1.7.1'
+  mockitoAndroidVersion = '2.8.47'
+  hamcrestVersion = '1.3'
+
+
+
+  slickDependencies = [appcompat: "com.android.support:appcompat-v7:${appCompatVersion}",
+                       rxjava   : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+                       rxandroid: "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+                       arrow    : "com.fernandocejas:arrow:${arrowVersion}"]
+
+  slickTestDependencies = [mockito       : "org.mockito:mockito-core:${mockitoVersion}",
+                           junit         : "junit:junit:${junitVersion}",
+                           assertj       : "org.assertj:assertj-core:${assertjVersion}",
+                           mockitoAndroid: "org.mockito:mockito-android:${mockitoAndroidVersion}"]
+
+  cityGuideDependencies = [appcompat          : "com.android.support:appcompat-v7:${appCompatVersion}",
+                           design             : "com.android.support:design:${appCompatVersion}",
+                           support            : "com.android.support:support-v4:${appCompatVersion}",
+                           playServices       : "com.google.android.gms:play-services:${playServicesVersion}",
+                           cardview           : "com.android.support:cardview-v7:${appCompatVersion}",
+                           dagger             : "com.google.dagger:dagger:${daggerVersion}",
+                           daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
+                           annotation         : "javax.annotation:jsr250-api:${annotationVersion}",
+                           retrofit           : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+                           retrofitGson       : "com.squareup.retrofit2:converter-gson:${retrofitAdaptersVersion}",
+                           retrofitRxjava2    : "com.squareup.retrofit2:adapter-rxjava2:${retrofitAdaptersVersion}",
+                           smarttablayout     : "com.ogaclejapan.smarttablayout:library:${smartTabLayoutVersion}",
+                           smarttablayoutUtils: "com.ogaclejapan.smarttablayout:utils-v13:${smartTabLayoutVersion}",
+                           butterknife        : "com.jakewharton:butterknife:${butterknifeVersion}",
+                           butterknifeCompiler: "com.jakewharton:butterknife-compiler:${butterknifeVersion}",
+                           slick              : "com.abozaid.slick:Slick:${slickVersion}"]
+
+  cityGuideTestDependencies = [mockito : "org.mockito:mockito-core:${mockitoVersion}",
+                               junit   : "junit:junit:${junitVersion}",
+                               hamcrest: "org.hamcrest:hamcrest-library:${hamcrestVersion}"]
+
+  //bintray
+  bintrayUser = properties.getProperty("bintray.user")
+  bintrayKey = properties.getProperty("bintray.apikey")
+
+  bintrayRepo = 'maven'
+  bintrayName = 'Slick'
+  RETROFIT_VERSION = "2.1.0"
+
+  siteUrl = properties.getProperty("siteUrl")
+  gitUrl = properties.getProperty("gitUrl")
+
+  publishedGroupId = properties.getProperty("publishedGroupId")
+  libraryName = properties.getProperty("libraryName")
+  artifact = properties.getProperty("artifact")
+  libraryDescription = properties.getProperty("libraryDescription")
+
+  developerId = properties.getProperty("developerId")
+  developerName = properties.getProperty("developerName")
+  developerEmail = properties.getProperty("developerEmail")
+
+  licenseName = properties.getProperty("licenseName")
+  licenseUrl = properties.getProperty("licenseUrl")
+  bintrayPassword = properties.getProperty("bintray.gpg.password")
+
+  
+  apiKey = properties.getProperty("apiKey")
+  googleMapsKey = properties.getProperty("googleMapsKey")
+  bintrayPassword = properties.getProperty("bintray.gpg.password")
+  allLicenses = ["Apache-2.0"]
+}
+

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    card_view:cardUseCompatPadding="false"
+    >
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:orientation="horizontal"
+      >
+
+
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        />
+
+    <LinearLayout
+        android:id="@+id/item_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/item_image"
+        android:orientation="vertical"
+        >
+
+
+      <TextView
+          android:id="@+id/item_name"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="5dp"
+          android:ellipsize="end"
+          android:singleLine="true"
+          />
+
+
+      <RatingBar
+          android:id="@+id/item_ratingBar"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:max="5"
+          android:paddingLeft="3dp"
+          android:progressDrawable="@drawable/rating_drawable"
+          style="?android:attr/ratingBarStyleIndicator"
+
+          />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/item_holder"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        />
+
+
+  </RelativeLayout>
+
+  <include layout="@layout/horizontal_line_separator"></include>
+</android.support.v7.widget.CardView>

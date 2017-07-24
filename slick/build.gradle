@@ -1,0 +1,133 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+android {
+  compileSdkVersion 25
+  buildToolsVersion "25.0.2"
+
+  defaultConfig {
+    minSdkVersion 14
+    targetSdkVersion 25
+    versionCode 1
+    versionName "1.0"
+
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      testCoverageEnabled true
+    }
+    debug {
+      testCoverageEnabled true
+    }
+    repositories {
+      jcenter()
+      mavenCentral()
+    }
+  }
+}
+version = "0.1"
+group = "com.github.abozaid.slick" // Maven Group ID for the artifact
+def globalConfiguration = rootProject.extensions.getByName("ext")
+install {
+  repositories.mavenInstaller {
+    // This generates POM.xml with proper parameters
+    pom {
+      project {
+        packaging 'aar'
+
+        name globalConfiguration.bintrayName
+        // description
+        description globalConfiguration.libraryDescription
+        url globalConfiguration.siteUrl
+
+        // license
+        licenses {
+          license {
+            name globalConfiguration.licenseName
+            url globalConfiguration.licenseUrl
+          }
+        }
+        developers {
+          developer {
+            id globalConfiguration.developerId
+            name globalConfiguration.developerName
+            email globalConfiguration.developerEmail
+          }
+        }
+        scm {
+          connection globalConfiguration.gitUrl
+          developerConnection globalConfiguration.gitUrl
+          url globalConfiguration.siteUrl
+        }
+      }
+    }
+  }
+}
+
+task sourcesJar(type: Jar) {
+  from android.sourceSets.main.java.srcDirs
+  classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+  source = android.sourceSets.main.java.srcDirs
+  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+  classifier = 'javadoc'
+  from javadoc.destinationDir
+}
+tasks.withType(JavaCompile) { options.encoding = "UTF-8" }
+
+artifacts {
+  archives javadocJar
+  archives sourcesJar
+}
+
+bintray {
+  user = globalConfiguration.bintrayUser
+  key = globalConfiguration.bintrayKey
+
+  configurations = ['archives']
+  pkg {
+    repo = globalConfiguration.bintrayRepo
+    name = globalConfiguration.bintrayName
+    desc = globalConfiguration.libraryDescription
+    websiteUrl = globalConfiguration.siteUrl
+    vcsUrl = globalConfiguration.gitUrl
+    licenses = ["Apache-2.0"]
+    publish = true
+    publicDownloadNumbers = true
+    version {
+      desc = globalConfiguration.libraryDescription
+      gpg {
+        sign = true //Determines whether to GPG sign the files. The default is false
+        passphrase = globalConfiguration.bintrayPassword
+      }
+    }
+  }
+}
+
+
+dependencies {
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  def slickDependencies = rootProject.ext.slickDependencies
+  def slickTestDependencies = rootProject.ext.slickTestDependencies
+
+
+  compile slickDependencies.appcompat
+  compile slickDependencies.rxjava
+  compile slickDependencies.rxandroid
+  compile slickDependencies.arrow
+
+
+  testCompile slickTestDependencies.junit
+  testCompile slickTestDependencies.assertj
+  testCompile slickTestDependencies.mockito
+  androidTestCompile slickTestDependencies.mockitoAndroid
+}

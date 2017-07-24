@@ -1,0 +1,101 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+//apply plugin: 'com.neenbedankt.android-apt'
+
+//get data from properties
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+android {
+  compileSdkVersion 25
+  buildToolsVersion '25.0.0'
+
+  //compileSdkVersion 'android-N'
+  //buildToolsVersion '24.0.0-rc3'
+
+  defaultConfig {
+    applicationId "com.abozaid.cityguide"
+    minSdkVersion 14
+    targetSdkVersion 25
+    versionCode 1
+    versionName "0.0.1"
+
+    def configuration = rootProject.extensions.getByName("ext")
+
+    //compileSdkVersion
+    buildConfigField "String", "API_KEY", configuration.getAt("apiKey")
+    resValue "string", "google_maps_key", configuration.getAt("googleMapsKey")
+    multiDexEnabled true
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      testCoverageEnabled true
+    }
+    debug {
+      testCoverageEnabled true
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  buildTypes.each {
+    it.buildConfigField "String", "BASE_URL", "\"https://maps.googleapis.com/maps/api/place/\""
+    it.buildConfigField "int", "CACHE_TIME", "432000" // 5days
+    it.buildConfigField "String", "OUTPUT", "\"json\""
+    it.buildConfigField "int", "RADIUS", "500"
+  }
+  lintOptions {
+    abortOnError false
+  }
+}
+
+repositories {
+  maven {
+    url 'https://dl.bintray.com/abozaid/maven'
+  }
+}
+dependencies {
+  compile fileTree(include: ['*.jar'], dir: 'libs')
+
+  def cityDependencies = rootProject.ext.cityGuideDependencies
+  def cityTestDependencies = rootProject.ext.cityGuideTestDependencies
+
+  compile cityDependencies.appcompat
+  compile cityDependencies.design
+  compile cityDependencies.support
+  compile cityDependencies.playServices
+  compile cityDependencies.cardview
+  //compile cityDependencies.slick
+  //compile "com.abozaid.slick:Slick:0.1"
+
+  //dagger
+  compile cityDependencies.dagger
+  annotationProcessor cityDependencies.daggerCompiler
+  provided cityDependencies.annotation
+
+  //retrofit and adapters
+  compile cityDependencies.retrofit
+  compile cityDependencies.retrofitGson
+  compile cityDependencies.retrofitRxjava2
+
+  //butterknife
+  compile cityDependencies.butterknife
+  annotationProcessor cityDependencies.butterknifeCompiler
+
+  //custom tab
+  compile cityDependencies.smarttablayout
+  compile cityDependencies.smarttablayoutUtils
+
+
+  //testing
+  testCompile cityTestDependencies.junit
+  testCompile cityTestDependencies.mockito
+  androidTestCompile cityTestDependencies.hamcrest
+
+
+  compile project(':slick')
+}

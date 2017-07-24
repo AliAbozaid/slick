@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="types">
+    <item>Bar</item>
+    <item>Bistro</item>
+    <item>Cafe</item>
+  </string-array>
+
+</resources>

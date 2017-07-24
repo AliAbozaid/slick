@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <View
+      android:id="@+id/separator_line"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/line_separetor_hieght"
+      android:layout_marginLeft="12dp"
+      android:background="@color/grey"
+      />
+
+</merge>

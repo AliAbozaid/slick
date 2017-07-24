@@ -1,0 +1,20 @@
+<resources>
+  <string name="app_name">CityGuide</string>
+  <string name="action_settings">Settings</string>
+
+  <!--permission text-->
+  <string name="permission_location">Location permission is needed to get best recommendation.</string>
+  <string name="ok">OK</string>
+  <string name="permision_available_settings">Location Permissions have been granted. You can get best recommendation.</string>
+  <string name="permissions_not_granted">Permissions were not granted.</string>
+  <string name="enable_location">Please enable location.</string>
+
+  <string name="about_me">About</string>
+  <string name="city_guide">City Guide</string>
+  <string name="about">This sample developed by Ali Abozaid you can find me here\n
+    <b>Linkedin</b>: https://eg.linkedin.com/in/ali-abozaid-00080b41\n
+    <b>Mail</b>: ali.abozaid22@gmail.com\n
+    <b>Phone</b>: +201282357900</string>
+
+
+</resources>
