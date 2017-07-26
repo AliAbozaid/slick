@@ -3,8 +3,16 @@ allprojects {
     jcenter()
   }
 }
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.file) {
+  Properties localProperties = new Properties()
+  localPropertiesFile.withInputStream { localProperties.load(it) }
+  localProperties.each { key, value ->
+    properties.ext.set(key, value)
+  }
+}
+/*Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())*/
 
 ext {
 
@@ -59,40 +67,42 @@ ext {
                            smarttablayoutUtils: "com.ogaclejapan.smarttablayout:utils-v13:${smartTabLayoutVersion}",
                            butterknife        : "com.jakewharton:butterknife:${butterknifeVersion}",
                            butterknifeCompiler: "com.jakewharton:butterknife-compiler:${butterknifeVersion}",
-                           slick              : "com.abozaid.slick:Slick:${slickVersion}"]
+                           slick              : "com.github.aliabozaid.slick:Slick:${slickVersion}"]
 
   cityGuideTestDependencies = [mockito : "org.mockito:mockito-core:${mockitoVersion}",
                                junit   : "junit:junit:${junitVersion}",
                                hamcrest: "org.hamcrest:hamcrest-library:${hamcrestVersion}"]
 
   //bintray
-  bintrayUser = properties.getProperty("bintray.user")
-  bintrayKey = properties.getProperty("bintray.apikey")
+  bintrayUser = project.properties["bintray.user"]
+  bintrayKey = project.properties["bintray.apikey"]
 
   bintrayRepo = 'maven'
   bintrayName = 'Slick'
   RETROFIT_VERSION = "2.1.0"
 
-  siteUrl = properties.getProperty("siteUrl")
-  gitUrl = properties.getProperty("gitUrl")
+  siteUrl = project.properties["siteUrl"]
+  gitUrl = project.properties["gitUrl"]
+  sonatypeRepoUrl = project.properties["sonatypeRepo"]
 
-  publishedGroupId = properties.getProperty("publishedGroupId")
-  libraryName = properties.getProperty("libraryName")
-  artifact = properties.getProperty("artifact")
-  libraryDescription = properties.getProperty("libraryDescription")
+  publishedGroupId = project.properties["publishedGroupId"]
+  libraryName = project.properties["libraryName"]
+  artifact = project.properties["artifact"]
+  libraryDescription = project.properties["libraryDescription"]
 
-  developerId = properties.getProperty("developerId")
-  developerName = properties.getProperty("developerName")
-  developerEmail = properties.getProperty("developerEmail")
+  developerId = project.properties["developerId"]
+  developerName = project.properties["developerName"]
+  developerEmail = project.properties["developerEmail"]
 
-  licenseName = properties.getProperty("licenseName")
-  licenseUrl = properties.getProperty("licenseUrl")
-  bintrayPassword = properties.getProperty("bintray.gpg.password")
+  licenseName = project.properties["licenseName"]
+  licenseUrl = project.properties["licenseUrl"]
+  bintrayPassword = project.properties["bintray.gpg.password"]
 
   
-  apiKey = properties.getProperty("apiKey")
-  googleMapsKey = properties.getProperty("googleMapsKey")
-  bintrayPassword = properties.getProperty("bintray.gpg.password")
+  apiKey = project.properties["apiKey"]
+  googleMapsKey = project.properties["googleMapsKey"]
+  bintrayPassword = project.properties["bintray.gpg.password"]
+  relativePath = project.properties["relativePath"]
   allLicenses = ["Apache-2.0"]
 }
 

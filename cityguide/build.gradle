@@ -69,8 +69,8 @@ dependencies {
   compile cityDependencies.support
   compile cityDependencies.playServices
   compile cityDependencies.cardview
-  //compile cityDependencies.slick
-  //compile "com.abozaid.slick:Slick:0.1"
+  compile cityDependencies.slick
+  //compile project(':slick')
 
   //dagger
   compile cityDependencies.dagger
@@ -95,7 +95,4 @@ dependencies {
   testCompile cityTestDependencies.junit
   testCompile cityTestDependencies.mockito
   androidTestCompile cityTestDependencies.hamcrest
-
-
-  compile project(':slick')
 }

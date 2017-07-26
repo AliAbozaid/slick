@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
+
 
 android {
   compileSdkVersion 25
@@ -10,7 +9,7 @@ android {
     minSdkVersion 14
     targetSdkVersion 25
     versionCode 1
-    versionName "1.0"
+    versionName "0.1"
 
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
@@ -29,9 +28,40 @@ android {
     }
   }
 }
-version = "0.1"
-group = "com.github.abozaid.slick" // Maven Group ID for the artifact
+
+repositories {
+  jcenter()
+  mavenCentral()
+}
+
+
+
+dependencies {
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  def slickDependencies = rootProject.ext.slickDependencies
+  def slickTestDependencies = rootProject.ext.slickTestDependencies
+
+
+  compile slickDependencies.appcompat
+  compile slickDependencies.rxjava
+  compile slickDependencies.rxandroid
+  compile slickDependencies.arrow
+
+  testCompile slickTestDependencies.junit
+  testCompile slickTestDependencies.assertj
+  testCompile slickTestDependencies.mockito
+  androidTestCompile slickTestDependencies.mockitoAndroid
+}
+
+apply plugin: 'com.github.dcendents.android-maven'
+
+
+
 def globalConfiguration = rootProject.extensions.getByName("ext")
+
+version = android.defaultConfig.versionName
+group = "com.github.aliabozaid.slick" // Maven Group ID for the artifact
+archivesBaseName = globalConfiguration.bintrayName
 install {
   repositories.mavenInstaller {
     // This generates POM.xml with proper parameters
@@ -40,10 +70,14 @@ install {
         packaging 'aar'
 
         name globalConfiguration.bintrayName
+        artifactId globalConfiguration.bintrayName
+        groupId "com.github.aliabozaid.slick"
+        version android.defaultConfig.versionName
+        //relativePath globalConfiguration.relativePath
         // description
         description globalConfiguration.libraryDescription
         url globalConfiguration.siteUrl
-
+        inceptionYear = '2017'
         // license
         licenses {
           license {
@@ -63,30 +97,47 @@ install {
           developerConnection globalConfiguration.gitUrl
           url globalConfiguration.siteUrl
         }
+
       }
-    }
+    } .writeTo("$buildDir/poms/pom-default.xml").writeTo("pom.xml")
   }
 }
+
+
+apply plugin: 'com.jfrog.bintray'
+//apply plugin: 'maven'
+apply plugin: 'signing'
 
 task sourcesJar(type: Jar) {
   from android.sourceSets.main.java.srcDirs
   classifier = 'sources'
 }
-
 task javadoc(type: Javadoc) {
-  source = android.sourceSets.main.java.srcDirs
-  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+  description "app javadocs"
+  source = android.libraryVariants["release"].javaCompile.source
+  ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+  classpath =
+      files(android.libraryVariants["release"].javaCompile.classpath.files) + files(ext.androidJar)
+  options.links("http://docs.oracle.com/javase/7/docs/api/");
+  options.links("http://d.android.com/reference/");
+  exclude '**/BuildConfig.java'
+  exclude '**/R.java'
 }
+
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
   classifier = 'javadoc'
   from javadoc.destinationDir
 }
 tasks.withType(JavaCompile) { options.encoding = "UTF-8" }
-
 artifacts {
   archives javadocJar
   archives sourcesJar
+}
+
+signing {
+  required { gradle.taskGraph.hasTask("uploadArchives") }
+  sign configurations.archives
 }
 
 bintray {
@@ -112,22 +163,5 @@ bintray {
     }
   }
 }
+apply plugin: 'android-maven'
 
-
-dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  def slickDependencies = rootProject.ext.slickDependencies
-  def slickTestDependencies = rootProject.ext.slickTestDependencies
-
-
-  compile slickDependencies.appcompat
-  compile slickDependencies.rxjava
-  compile slickDependencies.rxandroid
-  compile slickDependencies.arrow
-
-
-  testCompile slickTestDependencies.junit
-  testCompile slickTestDependencies.assertj
-  testCompile slickTestDependencies.mockito
-  androidTestCompile slickTestDependencies.mockitoAndroid
-}

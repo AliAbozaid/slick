@@ -11,7 +11,14 @@ maven {
 ```
 and this in dependencies
 ```
-compile 'com.abozaid.slick:Slick:0.1’
+compile 'com.github.aliabozaid.slick:Slick:0.1’
+```
+
+# Testing
+To be able to test the sample you have to define these two values in your local.properties file.
+```
+googleMapsKey="YOUR_GOOGLE_MAPS_KEY"
+apiKey="YOUR_GOOGLE_API_KEY"
 ```
 
 ## License
