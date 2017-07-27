@@ -53,11 +53,11 @@ android {
   }
 }
 
-repositories {
+/*repositories {
   maven {
     url 'https://dl.bintray.com/abozaid/maven'
   }
-}
+}*/
 dependencies {
   compile fileTree(include: ['*.jar'], dir: 'libs')
 

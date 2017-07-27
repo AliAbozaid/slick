@@ -3,12 +3,7 @@ Slick is  an Android library to create applications following the principles of 
 
 
 # Gradle
-add this in repositories
-```
-maven {
-       url 'https://dl.bintray.com/abozaid/maven'
-   }
-```
+
 and this in dependencies
 ```
 compile 'com.github.aliabozaid.slick:Slick:0.1’
