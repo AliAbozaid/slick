@@ -2,6 +2,7 @@ package com.abozaid.cityguide.presentation.dagger.modules;
 
 import com.abozaid.cityguide.presentation.dagger.components.PerView;
 import com.abozaid.cityguide.presentation.presenters.MainPresenter;
+import com.abozaid.cityguide.presentation.presenters.plugins.IMainPresenter;
 import com.abozaid.cityguide.presentation.ui.activities.plugins.IMainActivity;
 import com.abozaid.slick.plugins.IBaseActivity;
 import dagger.Module;
@@ -21,7 +22,7 @@ import dagger.Provides;
     return iBaseActivity;
   }
 
-  @Provides @PerView MainPresenter provideNetworkCalls(IBaseActivity iBaseActivity) {
+  @Provides @PerView IMainPresenter provideNetworkCalls(IBaseActivity iBaseActivity) {
     return new MainPresenter((IMainActivity) iBaseActivity);
   }
 }

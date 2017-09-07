@@ -1,7 +1,7 @@
 package com.abozaid.cityguide.presentation.dagger.components;
 
 import com.abozaid.cityguide.presentation.dagger.modules.ActivityModule;
-import com.abozaid.cityguide.presentation.presenters.MainPresenter;
+import com.abozaid.cityguide.presentation.presenters.plugins.IMainPresenter;
 import com.abozaid.cityguide.presentation.ui.activities.MainActivity;
 import com.abozaid.slick.plugins.IBaseActivity;
 import dagger.Component;
@@ -15,5 +15,5 @@ import dagger.Component;
 
   IBaseActivity fragment();
 
-  MainPresenter mainPresenter();
+  IMainPresenter mainPresenter();
 }

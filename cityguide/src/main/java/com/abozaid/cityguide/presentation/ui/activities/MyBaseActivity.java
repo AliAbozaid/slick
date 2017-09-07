@@ -20,10 +20,10 @@ public abstract class MyBaseActivity extends BaseActivity {
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    fragmentBuild(this);
+    activityBuild(this);
   }
 
-  public void fragmentBuild(IBaseActivity iBaseActivity) {
+  public void activityBuild(IBaseActivity iBaseActivity) {
     activityComponent =
         DaggerActivityComponent.builder().activityModule(new ActivityModule(iBaseActivity)).build();
   }

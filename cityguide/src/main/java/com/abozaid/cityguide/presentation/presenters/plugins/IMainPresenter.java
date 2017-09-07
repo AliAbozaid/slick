@@ -7,4 +7,7 @@ import com.abozaid.slick.plugins.IBasePresenter;
  */
 
 public interface IMainPresenter extends IBasePresenter {
+  void requestLocationPermission();
+
+  void getLocationPermission();
 }

@@ -2,6 +2,7 @@ package com.abozaid.cityguide.presentation.dagger.modules;
 
 import com.abozaid.cityguide.presentation.dagger.components.PerView;
 import com.abozaid.cityguide.presentation.presenters.PlacesPresenter;
+import com.abozaid.cityguide.presentation.presenters.plugins.IPlacesPresenter;
 import com.abozaid.cityguide.presentation.ui.fragments.plugins.IPlacesFragment;
 import com.abozaid.slick.plugins.IBaseFragment;
 import dagger.Module;
@@ -19,7 +20,7 @@ import dagger.Provides;
     return iBaseFragment;
   }
 
-  @Provides @PerView PlacesPresenter provideNetworkCalls(IBaseFragment iBaseFragment) {
+  @Provides @PerView IPlacesPresenter provideNetworkCalls(IBaseFragment iBaseFragment) {
     return new PlacesPresenter((IPlacesFragment) iBaseFragment);
   }
 }

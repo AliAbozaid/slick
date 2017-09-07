@@ -93,7 +93,7 @@ public class MainPresenter extends BaseActivityPresenter<IMainActivity>
     return ((CityGuideApp) ((Activity) getView()).getApplication()).getApiComponent();
   }
 
-  public void getLocationPermission() {
+  @Override public void getLocationPermission() {
     if (Build.VERSION.SDK_INT >= 23) {
       if (!PermissionUtil.verifyPermissionsGranted(PERMISSIONS_LOCATION, (Activity) getView())) {
         // location permissions have not been granted.
@@ -116,7 +116,7 @@ public class MainPresenter extends BaseActivityPresenter<IMainActivity>
     }
   }
 
-  public void requestLocationPermission() {
+  @Override public void requestLocationPermission() {
     getView().requestPermission(PERMISSIONS_LOCATION, 0);
   }
 

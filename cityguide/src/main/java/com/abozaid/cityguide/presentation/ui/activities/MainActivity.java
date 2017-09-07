@@ -15,7 +15,7 @@ import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.abozaid.cityguide.R;
-import com.abozaid.cityguide.presentation.presenters.MainPresenter;
+import com.abozaid.cityguide.presentation.presenters.plugins.IMainPresenter;
 import com.abozaid.cityguide.presentation.ui.activities.plugins.IMainActivity;
 import com.abozaid.cityguide.presentation.ui.adapters.TabAdapters;
 import com.abozaid.cityguide.presentation.ui.fragments.PlacesFragment;
@@ -35,7 +35,7 @@ public class MainActivity extends MyBaseActivity implements IMainActivity {
   @BindArray(R.array.types) String[] titles;
   TabAdapters adapter;
 
-  @Inject MainPresenter presenter;
+  @Inject IMainPresenter presenter;
 
   @Override public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

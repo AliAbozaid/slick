@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import com.abozaid.cityguide.R;
 import com.abozaid.cityguide.domain.callbacks.PlacesItemClicked;
 import com.abozaid.cityguide.domain.models.ListOfPlacesModel;
-import com.abozaid.cityguide.presentation.presenters.PlacesPresenter;
+import com.abozaid.cityguide.presentation.presenters.plugins.IPlacesPresenter;
 import com.abozaid.cityguide.presentation.ui.activities.MapActivity;
 import com.abozaid.cityguide.presentation.ui.adapters.PlacesAdapter;
 import com.abozaid.cityguide.presentation.ui.fragments.plugins.IPlacesFragment;
@@ -31,7 +31,6 @@ public class PlacesFragment extends MyBaseFragment implements IPlacesFragment, P
   @BindView(R.id.progress_bar) ProgressBar progressBar;
   @BindView(R.id.swipeContainer) SwipeRefreshLayout swipeRefreshLayout;
 
-
   PlacesAdapter placesAdapter;
 
   private static final String ARG_PARAM1 = "type";
@@ -40,7 +39,7 @@ public class PlacesFragment extends MyBaseFragment implements IPlacesFragment, P
   private RecyclerView.LayoutManager mLayoutManager;
   ArrayList<ListOfPlacesModel.Results> places;
 
-  @Inject PlacesPresenter presenter;
+  @Inject IPlacesPresenter presenter;
 
   public PlacesFragment() {
     // Required empty public constructor
