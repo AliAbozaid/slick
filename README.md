@@ -1,6 +1,9 @@
 # Slick
 Slick is  an Android library to create applications following the principles of Clean Architecture.
 
+# Article
+
+For more details check this[article.](https://medium.com/@abozaid/slick-for-clean-architecture-727a0b5fc015)
 
 # Gradle
 
@@ -15,6 +18,40 @@ To be able to test the sample you have to define these two values in your local.
 googleMapsKey="YOUR_GOOGLE_MAPS_KEY"
 apiKey="YOUR_GOOGLE_API_KEY"
 ```
+
+
+# Usage
+At first, your fragment or activity should extend **`BaseFragment`** or **`BaseActivity`** and implements the callback interface. 
+
+The callback should contain your custom response. 
+
+_**i.e:**_ In our sample,
+
+**`IPlacesFragment`** extends **`IBaseFragment`** _(You can also use **`IBaseActivity`** in case of activity)._ 
+
+#### Details
+**`IPlacesFragment`** has the following methods:
+```
+void updateView(ListOfPlacesModel data);
+ 
+void showError(Throwable t);
+```
+
+ **`getpresenter()`** should return an **`IPresenter`** object.
+ 
+```
+@Override public IPresenter getPresenter() {
+    return presenter;
+  }
+ ```
+
+Your presenter interface should extends **`IPresenter`**. Then, inject the presenter object inside Fragement or Activity.
+
+```
+@Inject IPlacesPresenter presenter;
+```
+
+Finally, use the interactor to handle the request from the data the server.
 
 ## License
 
