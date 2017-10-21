@@ -3,13 +3,13 @@ Slick is  an Android library to create applications following the principles of 
 
 # Article
 
-For more details check this[article.](https://medium.com/@abozaid/slick-for-clean-architecture-727a0b5fc015)
+For more details check this [article.](https://medium.com/@abozaid/slick-for-clean-architecture-727a0b5fc015)
 
 # Gradle
 
 and this in dependencies
 ```
-compile 'com.github.aliabozaid.slick:Slick:0.1’
+compile 'com.github.aliabozaid.slick:Slick:0.2’
 ```
 
 # Testing
