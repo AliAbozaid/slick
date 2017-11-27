@@ -21,7 +21,7 @@ ext {
   rxJavaVersion = '2.0.2'
   rxAndroidVersion = '2.0.1'
   arrowVersion = '1.0.0'
-  slickVersion = '0.1'
+  slickVersion = '0.2'
   designVersion = '25.3.1'
   playServicesVersion = '8.4.0'
   daggerVersion = '2.9'
@@ -99,8 +99,8 @@ ext {
   bintrayPassword = project.properties["bintray.gpg.password"]
 
   
-  apiKey = project.properties["apiKey"]
-  googleMapsKey = project.properties["googleMapsKey"]
+  apiKey = "\"AIzaSyAJbOxbR78AFLG81bh2iXsazXpM4h_SHDQ\""
+  googleMapsKey = "AIzaSyCgcCFbNlxKeTm-5DE2sgz33ZWOdzYD0qc"
   bintrayPassword = project.properties["bintray.gpg.password"]
   relativePath = project.properties["relativePath"]
   allLicenses = ["Apache-2.0"]

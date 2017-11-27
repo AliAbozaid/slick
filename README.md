@@ -13,10 +13,9 @@ compile 'com.github.aliabozaid.slick:Slick:0.2’
 ```
 
 # Testing
-To be able to test the sample you have to define these two values in your local.properties file.
+Just run this command
 ```
-googleMapsKey="YOUR_GOOGLE_MAPS_KEY"
-apiKey="YOUR_GOOGLE_API_KEY"
+./gradlew assembleDebug
 ```
 
 

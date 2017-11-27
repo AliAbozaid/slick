@@ -51,6 +51,15 @@ android {
   lintOptions {
     abortOnError false
   }
+  signingConfigs {
+
+    debug {
+      keyAlias 'androiddebugkey'
+      keyPassword 'android'
+      storeFile file('../buildsystem/debug.keystore')
+      storePassword 'android'
+    }
+  }
 }
 
 /*repositories {
